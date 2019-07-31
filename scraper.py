@@ -149,6 +149,7 @@ def create_df():
     df["fighter1_odds"] = f1_odds
     df["fighter2_odds"] = f2_odds
     df["Favourite"] = favourite
+    df["Underdog"] = underdog
     df["Label"] = label
     print(f"Successfully scraped {df.shape[0]} fights and last fight card was {df.iloc[-1, :]['Events']} {df.iloc[-1, :]['Location']}")
     print(df["Label"].value_counts()/len(df))
@@ -257,7 +258,7 @@ def merge_data(df):
     test2["SUBA_delta"] = test2.apply(suba_delta, axis=1)
     test2["AGE_delta"] = test2.apply(age_delta, axis=1)
     
-    final_df = test2[['Events', 'Location', 'Fighter1', 'Fighter2', 'Favourite', 'Label', 'REACH_delta', 'SLPM_delta', 'SAPM_delta', 'STRA_delta', 'STRD_delta', 'TD_delta', 'TDA_delta', 'TDD_delta', 'SUBA_delta', "AGE_delta", 'Odds_delta']]
+    final_df = test2[['Events','Favourite', 'Underdog', 'Label', 'REACH_delta', 'SLPM_delta', 'SAPM_delta', 'STRA_delta', 'STRD_delta', 'TD_delta', 'TDA_delta', 'TDD_delta', 'SUBA_delta', "AGE_delta", 'Odds_delta']]
     
     return final_df
 
