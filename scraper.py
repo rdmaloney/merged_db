@@ -68,6 +68,13 @@ def scrape_data():
 
             f1_odds.append(odds_f1)
             f2_odds.append(odds_f2)
+            
+            fighters = row.find_all('a', attrs={'href': re.compile("^fighter_profile.php")})
+            f1.append(fighters[0].text)
+            f2.append(fighters[1].text)
+            winner.append(fighters[2].text)
+            
+            
 
             # how to generate label
             odds_dict = {}
@@ -80,15 +87,17 @@ def scrape_data():
                 label.append("Favourite")
 
             if odds_f1 > odds_f2:
-                favourite.append("f2")
+                favourite.append(f2)
             else:
-                favourite.append("f1")
+                favourite.append(f1)
+                
+            if odds_f1 < odds_f2:
+                underdog.append(f2)
+            else:
+                underdog.append(f1)
 
 
-            fighters = row.find_all('a', attrs={'href': re.compile("^fighter_profile.php")})
-            f1.append(fighters[0].text)
-            f2.append(fighters[1].text)
-            winner.append(fighters[2].text)
+            
     return None
 
 def create_df():
