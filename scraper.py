@@ -42,7 +42,7 @@ def scrape_data():
 
         data = requests.get(link)
         soup = BeautifulSoup(data.text, 'html.parser')
-        time.sleep(1)
+        time.sleep(2)
         # specific table with the information
         rows = soup.find_all('table', {'cellspacing': "5"})
 
@@ -78,16 +78,13 @@ def scrape_data():
                 label.append("Underdog")
             else:
                 label.append("Favourite")
-            
-            favourite = if df["Favourite"] == "f1"
+
+            if odds_f1 > odds_f2:
+                favourite.append("f2")
             else:
-                favourite="f2"
-                
-            underdog = if df["Underdog"]=="f1"
-            else:
-                underdog="f2"
-                
-                
+                favourite.append("f1")
+
+
             fighters = row.find_all('a', attrs={'href': re.compile("^fighter_profile.php")})
             f1.append(fighters[0].text)
             f2.append(fighters[1].text)
