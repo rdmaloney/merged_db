@@ -78,21 +78,23 @@ def scrape_data():
                 label.append("Underdog")
             else:
                 label.append("Favourite")
-
-            if odds_f1 > odds_f2:
-                favourite.append(f2)
-            else:
-                favourite.append(f1)
-                
-            if odds_f1 < odds_f2:
-                underdog.append(f2)
-            else:
-                underdog.append(f1)
                 
             fighters = row.find_all('a', attrs={'href': re.compile("^fighter_profile.php")})
             f1.append(fighters[0].text)
             f2.append(fighters[1].text)
             winner.append(fighters[2].text)
+
+            if odds_f1 > odds_f2:
+                favourite.append(fighters[1].text)
+            else:
+                favourite.append(fighters[0].text)
+                
+            if odds_f1 < odds_f2:
+                underdog.append(fighters[1].text)
+            else:
+                underdog.append(fighters[0].text)
+                
+            
                  
     return None
 
